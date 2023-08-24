@@ -5,16 +5,22 @@
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
+}
 
+:root {
+    --primary:#ddd;
+    --blue:#0082e6;
+    --light:#fff;
+    --shadow:0 1px 5px rgb(104, 104, 104, 0.553);
 }
 body{ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-nav{
+nav{position: fixed;
     display: flex;
-    justify-content: space-between;
-    background-color: #0082E6;
+    background-color:var(--blue);
     height: 120px;
     width: 100%;
+    justify-content: space-between;
 }
 label.logo{
     color: white;
@@ -24,9 +30,8 @@ label.logo{
     font-weight: bold;
 }
 
-nav ul{
-    margin-right: 150px;
-    float: right;
+nav ul{display: flex;
+    list-style: none;
 }
 nav ul li{
     display: inline-block;
@@ -44,7 +49,8 @@ nav ul li a{
  }
 a.active,a:hover{
     background:#1B9BFF;
-    transition: .0.3s;  transform: scale(1.0, 1.5);
+    transition: .0.3s; 
+     transform: scale(1.0, 1.5);
 }
 .checkbutton{
     font-size: 30px;
@@ -55,6 +61,7 @@ a.active,a:hover{
     right:40px ;
     cursor: pointer;
     display: none;
+
 }
 
 .checkbutton .fa-xmark{
@@ -66,18 +73,144 @@ a.active,a:hover{
     display: none;
 }
 
-@media (max-width: 952px){
+.wrapper{
+    display: grid;
+    gap: 50px;
+    padding: 10px;
+    
+    }
+
+    /*top conteiner*/
+
+    .top-conteiner{
+        margin-top: 80px;
+        display: grid;
+        grid-gap: 5px;
+        width: 100%;
+        height: 100px;
+        
+        line-height: 1.5;
+       /* grid-template-columns: 3fr 1fr;
+        grid-template-rows: 1fr 1fr; */
+      
+     grid-template-areas:"box1  box1 box2" 
+                            "box1 box1 box3";
+                        }
+                            
+    .showcase{
+        grid-area: box1;
+        min-height: 400px;
+        background: linear-gradient(rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.2)) ,url(../css/resourses/surface-8HPLpr3hebU-unsplash.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+        justify-content: center;
+        box-shadow: var(--shadow);
+}
+
+.showcase h1{
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-weight: normal;
+    margin-top: 0;
+    color: var(--light);
+}
+
+.showcase p{
+   color: var(--light);
+}
+
+    .top-box{
+        background: var(--light);
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        box-shadow: var(--shadow);
+        padding: 1.9rem;
+        margin: 10px;       
+}
+.top-box .student{
+font-size: 1.2rem;
+}
+.top-box-a{
+
+    grid-area:box2 ;
+    
+}
+    
+.top-box-b{
+
+        grid-area:box3 ;
+        
+    }
+
+img{
+    max-width: 100%;
+    max-height: 200px;
+   
+}
+
+    .student ~ .btn {
+        background:var(--blue);
+        color:var(--light);
+        padding: 0.6rem;
+        border-radius: 20px;
+    }
+    
+
+
+@media (max-width:952px){
+    /*nav bar for tablet*/
+    #check:checked ~ .checkbutton i:before{
+        content: "\f00d"
+    }
+    #check:checked ~ ul {
+        left:0%;
+    }
+    nav ul{
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        background: #111;
+        height: 100vh;
+        width: 100%;
+        text-align: center;
+        transition: all 0.3s;ease;
+
+    }
+
     label.logo{
         font-size: 30px;
         padding-left: 50px;
+    }
+    .checkbutton {
+        display: block;
     }
 
     nav ul li a{
         font-size: 16px;
     }
+    /**/
+    .showcase h1{
+        font-size: 2.5rem;
+    }
+    .top-conteiner{
+       
+     grid-template-areas:"box1  box1" 
+                            "box2  box3";
+                        } 
 }
 
 @media (max-width: 858px){
+    /*nav bar for mobile phone*/
+    nav ul{
+        display: block;
+    }
     .checkbutton{
         display: block;
     }
@@ -85,7 +218,7 @@ a.active,a:hover{
     ul{
         position: fixed;
         width: 100%;
-        /* height: 100vh; */
+         height: 100vh; 
         background: #2c3e50;
         top: 80px;
         left: 0;
@@ -93,12 +226,10 @@ a.active,a:hover{
         transition: all .5s;
     }
 
-    .checkbutton .fa-xmark {
-        display: none;
-    }
+    
 
     nav ul li{
-        display: none;
+        display: block;
         margin: 50px 0;
         line-height: 30px;
     }
@@ -109,18 +240,29 @@ a.active,a:hover{
         background: none;
         color: #0082E6;
     }
+    #check:checked ~ ul{
+        left:0;}
 
-     #check:checked ~ ul li, #check:checked ~ .checkbutton{
+
+    /* #check:checked ~ ul li, #check:checked ~ .checkbutton{
         display: block;
-        color: brown;
-    }
-    #check:checked ~ .checkbutton .fa-xmark {
-        display: block;
-    }
-    #check:checked ~ .checkbutton .fa-bars {
-        display: none;
-    }
+        color:white;
+    }*/
+
+    /*#check:checked ~ .checkbutton .fa-xmark { display: block;}*
+    
+    /*#check:checked ~ .checkbutton .fa-bars {
+        display: none}*/
+     
+        .top-conteiner{
+       
+            grid-template-areas:"box1" 
+                                   "box2"
+                                   "box3";
+                               } 
 
 }
+
+
 
     
